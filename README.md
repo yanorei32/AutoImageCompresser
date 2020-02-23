@@ -1,0 +1,2 @@
+# Auto Image Compresser
+

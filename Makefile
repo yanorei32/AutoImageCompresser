@@ -1,8 +1,10 @@
 CSC			= /cygdrive/c/windows/microsoft.net/framework/v4.0.30319/csc.exe
-TARGET		= AutoImageCompresser.exe
-SRC			=	src\\main.cs
 
-ZIP_DEPS	= 
+PROJ_NAME	= AutoImageCompresser
+TARGET		= $(PROJ_NAME).exe
+SRC			= src\\main.cs
+
+ZIP_DEPS	= LICENSE README.md
 
 CSC_FLAGS		=	/nologo \
 					/utf8output \
@@ -12,10 +14,17 @@ CSC_FLAGS		=	/nologo \
 
 all: $(TARGET)
 $(TARGET): $(SRC) $(DEPS)
-	$(CSC) $(CSC_FLAGS) /out:$(TARGET) $(SRC)
+	$(CSC) $(CSC_FLAGS) /out:$(PROJ_NAME)/$(TARGET) $(SRC)
+
+.PHONY: genzip
+genzip: $(PROJ_NAME).zip
+
+$(PROJ_NAME).zip: all
+	rm -f $(PROJ_NAME)/*.lnk
+	zip -r $(PROJ_NAME).zip $(PROJ_NAME)
 
 .PHONY: clean
 clean:
-	rm $(TARGET)
+	rm $(PROJ_NAME)/$(TARGET)
 
 
