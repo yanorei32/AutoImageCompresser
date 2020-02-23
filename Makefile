@@ -12,8 +12,8 @@ CSC_FLAGS		=	/nologo \
 					# /resource:res\\icon.ico,icon \
 					# /resource:res\\logo.png,logo
 
-all: $(TARGET)
-$(TARGET): $(SRC) $(DEPS)
+all: $(PROJ_NAME)/$(TARGET)
+$(PROJ_NAME)/$(TARGET): $(SRC)
 	$(CSC) $(CSC_FLAGS) /out:$(PROJ_NAME)/$(TARGET) $(SRC)
 
 .PHONY: genzip
