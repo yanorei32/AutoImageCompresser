@@ -107,8 +107,20 @@ class Program {
 	}
 
 	static void createSectionsShortcut(string iniPath) {
-		foreach (var section in getIniSections(iniPath))
+		var createdCount = 0;
+
+		foreach (var section in getIniSections(iniPath)) {
 			createShortcut(section);
+			++ createdCount;
+		}
+
+		MessageBox.Show(
+			string.Format("{0} shortcut(s) created", createdCount),
+			Program.APPLICATION_NAME,
+			MessageBoxButtons.OK,
+			MessageBoxIcon.Information
+		);
+
 	}
 
 	static ImageCodecInfo getImageCodecInfo(Guid formatId) {
@@ -508,15 +520,20 @@ class Program {
 				return;
 		}
 
-
 		if (oneshot) {
-			Console.WriteLine("OneShot: Find files...");
+			var pOpt = new ParallelOptions();
+			pOpt.MaxDegreeOfParallelism = Environment.ProcessorCount;
 
-			foreach (var f in Directory.GetFiles(inDir, pattern)) {
+			Console.WriteLine(string.Format(
+				"OneShot ({0} threads): Process files...",
+				pOpt.MaxDegreeOfParallelism
+			));
+
+			Parallel.ForEach(Directory.GetFiles(inDir, pattern), pOpt, f => {
 				var newF = getDestFileName(f, outDir, extension);
 
 				if (File.Exists(newF))
-					continue;
+					return;
 
 				resizeImage(
 					f,
@@ -527,7 +544,7 @@ class Program {
 					imageCodecInfo,
 					encoderParameters
 				);
-			}
+			});
 		}
 
 		if (observe) {
