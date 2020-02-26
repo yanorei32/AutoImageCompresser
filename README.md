@@ -1,4 +1,5 @@
 # Auto Image Compresser
+![image0](https://user-images.githubusercontent.com/11992915/75344611-e34a7a80-5892-11ea-8426-1ce5c19e389a.png)
 
 ## How to use
 
