@@ -349,76 +349,70 @@ class Program {
 				iniPath,
 				section,
 				"max_long_side",
-				string.Empty
+				"0"
 			);
 
-			if (maxLongSideStr != string.Empty) {
-				if (!uintRegex.IsMatch(maxLongSideStr)) {
-					MessageBox.Show(
-						string.Format(
-							"invalid max_long_side value (section: {0})",
-							section
-						),
-						Program.APPLICATION_NAME,
-						MessageBoxButtons.OK,
-						MessageBoxIcon.Hand
-					);
+			if (!uintRegex.IsMatch(maxLongSideStr)) {
+				MessageBox.Show(
+					string.Format(
+						"invalid max_long_side value (section: {0})",
+						section
+					),
+					Program.APPLICATION_NAME,
+					MessageBoxButtons.OK,
+					MessageBoxIcon.Hand
+				);
 
-					return;
-				}
-
-				maxLongSide = Int32.Parse(maxLongSideStr);
+				return;
 			}
+
+			maxLongSide = Int32.Parse(maxLongSideStr);
 
 			var maxWidthStr = getIniValue(
 				iniPath,
 				section,
 				"max_width",
-				string.Empty
+				"0"
 			);
 
-			if (maxWidthStr != string.Empty) {
-				if (!uintRegex.IsMatch(maxWidthStr)) {
-					MessageBox.Show(
-						string.Format(
-							"invalid max_width value (section: {0})",
-							section
-						),
-						Program.APPLICATION_NAME,
-						MessageBoxButtons.OK,
-						MessageBoxIcon.Hand
-					);
+			if (!uintRegex.IsMatch(maxWidthStr)) {
+				MessageBox.Show(
+					string.Format(
+						"invalid max_width value (section: {0})",
+						section
+					),
+					Program.APPLICATION_NAME,
+					MessageBoxButtons.OK,
+					MessageBoxIcon.Hand
+				);
 
-					return;
-				}
-
-				maxWidth = Int32.Parse(maxWidthStr);
+				return;
 			}
+
+			maxWidth = Int32.Parse(maxWidthStr);
 
 			var maxHeightStr = getIniValue(
 				iniPath,
 				section,
 				"max_height",
-				string.Empty
+				"0"
 			);
 
-			if (maxHeightStr != string.Empty) {
-				if (!uintRegex.IsMatch(maxHeightStr)) {
-					MessageBox.Show(
-						string.Format(
-							"invalid max_height value (section: {0})",
-							section
-						),
-						Program.APPLICATION_NAME,
-						MessageBoxButtons.OK,
-						MessageBoxIcon.Hand
-					);
+			if (!uintRegex.IsMatch(maxHeightStr)) {
+				MessageBox.Show(
+					string.Format(
+						"invalid max_height value (section: {0})",
+						section
+					),
+					Program.APPLICATION_NAME,
+					MessageBoxButtons.OK,
+					MessageBoxIcon.Hand
+				);
 
-					return;
-				}
-
-				maxHeight = Int32.Parse(maxHeightStr);
+				return;
 			}
+
+			maxHeight = Int32.Parse(maxHeightStr);
 		}
 
 
@@ -460,20 +454,8 @@ class Program {
 					iniPath,
 					section,
 					"observe_file_read_delay_ms",
-					string.Empty
+					"1000"
 				);
-
-				if (observeFileReadDelayMsStr == string.Empty) {
-					MessageBox.Show(
-						string.Format(
-							"observe_file_read_delay_ms is not defined (section: {0})",
-							section
-						),
-						Program.APPLICATION_NAME,
-						MessageBoxButtons.OK,
-						MessageBoxIcon.Hand
-					);
-				}
 
 				if (!uintRegex.IsMatch(observeFileReadDelayMsStr)) {
 					MessageBox.Show(

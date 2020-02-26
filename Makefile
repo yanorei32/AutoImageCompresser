@@ -1,20 +1,43 @@
 CSC			= /cygdrive/c/windows/microsoft.net/framework/v4.0.30319/csc.exe
 
+REPO		= https://github.com/Yanorei32/AutoImageCompresser
 PROJ_NAME	= AutoImageCompresser
-TARGET		= $(PROJ_NAME).exe
-SRC			= src\\main.cs
+RELEASE_DIR	= $(PROJ_NAME)
 
-ZIP_DEPS	= LICENSE README.md
+SRCS		= src\\main.cs
 
-CSC_FLAGS		=	/nologo \
-					/utf8output \
-					# /win32icon:res\\icon.ico \
-					# /resource:res\\icon.ico,icon \
-					# /resource:res\\logo.png,logo
+TARGET		= $(PROJ_NAME)\(CreateShortcut\).exe
 
-all: $(PROJ_NAME)/$(TARGET)
-$(PROJ_NAME)/$(TARGET): $(SRC)
-	$(CSC) $(CSC_FLAGS) /out:$(PROJ_NAME)/$(TARGET) $(SRC)
+CSC_FLAGS	= /nologo \
+			  /utf8output
+
+.PHONY: all
+all: $(RELEASE_DIR)/$(TARGET) \
+	$(RELEASE_DIR)/LICENSE.txt \
+	$(RELEASE_DIR)/README.url \
+	$(RELEASE_DIR)/configure.ini
+
+$(RELEASE_DIR)/$(TARGET): $(SRCS)
+	-mkdir -p $(RELEASE_DIR)
+	$(CSC) $(CSC_FLAGS) /out:$(RELEASE_DIR)\\$(TARGET) $(SRCS)
+
+$(RELEASE_DIR)/configure.ini: default.configure.ini
+	-mkdir -p $(RELEASE_DIR)
+	cp \
+		default.configure.ini \
+		$(RELEASE_DIR)/configure.ini
+
+$(RELEASE_DIR)/LICENSE.txt: LICENSE
+	-mkdir -p $(RELEASE_DIR)
+	cp \
+		LICENSE \
+		$(RELEASE_DIR)/LICENSE.txt
+
+$(RELEASE_DIR)/README.url:
+	-mkdir -p $(RELEASE_DIR)
+	echo -ne \
+		"[InternetShortcut]\r\nURL=$(REPO)/blob/master/README.md" \
+		> "$(RELEASE_DIR)/README.url"
 
 .PHONY: genzip
 genzip: $(PROJ_NAME).zip
@@ -25,6 +48,6 @@ $(PROJ_NAME).zip: all
 
 .PHONY: clean
 clean:
-	rm $(PROJ_NAME)/$(TARGET)
+	rm -r $(PROJ_NAME)
 
 
