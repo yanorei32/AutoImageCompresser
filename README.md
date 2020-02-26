@@ -28,3 +28,20 @@
 ### †1
 If all values are unconfigured, this application when not change resolution.
 
+## Build
+
+### Deps
+* Windows 10
+* Cygwin
+	* git
+	* make
+	* zip
+
+```bash
+git clone https://github.com/yanorei32/AutoImageCompresser
+cd AutoImageCompresser
+make genzip # zip create
+make # minimal
+make clean # clean
+```
+
