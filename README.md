@@ -9,6 +9,9 @@
 	* When launched, this application makes per-ini-section shortcuts.
 1. You can compress from a per-ini-section shortcut.
 
+### Latest release
+* [GitHub (releases)](https://github.com/Yanorei32/AutoImageCompresser/releases/latest)
+* [Booth (for boost)](https://yanorei32.booth.pm/items/1865877)
 
 ## INI section
 
